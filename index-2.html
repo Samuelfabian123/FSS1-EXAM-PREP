@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FSS 202 CBT Practice - Inferential Statistics</title>
+<style>
+:root{--g:#0b5d2a;--g2:#084a21;--gold:#c9a227;--bg:#eef1ee;--red:#b3261e;--ok:#1b7a3a}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",Arial,sans-serif;background:var(--bg);color:#1c1c1c}
+header{background:var(--g);color:#fff;text-align:center;padding:12px 10px;border-bottom:4px solid var(--gold)}
+header h1{margin:0;font-size:1.15rem;letter-spacing:.5px}
+header p{margin:3px 0 0;font-size:.85rem;opacity:.9}
+.wrap{max-width:1000px;margin:18px auto;padding:0 12px}
+.card{background:#fff;border:1px solid #cfd6cf;border-radius:6px;padding:20px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.hide{display:none!important}
+label{display:block;font-weight:600;margin:14px 0 5px;font-size:.9rem}
+input[type=text]{width:100%;padding:11px;border:1px solid #98a398;border-radius:4px;font-size:1rem}
+button{cursor:pointer;border:0;border-radius:4px;padding:11px 20px;font-size:.95rem;font-weight:600}
+.btn{background:var(--g);color:#fff}.btn:hover{background:var(--g2)}
+.btn2{background:#e3e7e3;color:#222}.btn2:hover{background:#d3d8d3}
+.btnr{background:var(--red);color:#fff}
+.err{color:var(--red);font-size:.85rem;margin-top:8px;min-height:1em}
+ul.rules{padding-left:20px;font-size:.9rem;line-height:1.6}
+.top{position:sticky;top:0;z-index:5;background:#fff;border:1px solid #cfd6cf;border-radius:6px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.timer{font-size:1.4rem;font-weight:700;font-family:Consolas,monospace;color:var(--g)}
+.timer.low{color:var(--red);animation:b 1s infinite}
+@keyframes b{50%{opacity:.4}}
+.grid{display:grid;grid-template-columns:1fr 250px;gap:12px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.qn{font-weight:700;color:var(--g);margin-bottom:8px}
+.qt{font-size:1.08rem;line-height:1.5;margin-bottom:14px}
+.opt{display:flex;gap:10px;align-items:flex-start;border:1px solid #c5ccc5;border-radius:5px;padding:11px 12px;margin:8px 0;cursor:pointer}
+.opt:hover{background:#f3f7f3}
+.opt.sel{background:#e2f1e6;border-color:var(--g)}
+.opt b{min-width:20px}
+.nav{display:flex;justify-content:space-between;margin-top:16px;gap:8px}
+.pal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.pal button{padding:8px 0;background:#e3e7e3;color:#222;font-size:.8rem}
+.pal button.ans{background:var(--g);color:#fff}
+.pal button.cur{outline:3px solid var(--gold)}
+.leg{font-size:.78rem;margin-top:10px;color:#444}
+.res{text-align:center}
+.score{font-size:2.4rem;font-weight:800;color:var(--g)}
+.info{display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;text-align:left;max-width:520px;margin:12px auto;font-size:.92rem}
+.rv{border:1px solid #cfd6cf;border-left:6px solid;border-radius:5px;padding:14px;margin:12px 0;background:#fff}
+.rv.p{border-left-color:var(--ok)}.rv.f{border-left-color:var(--red)}
+.tag{display:inline-block;font-size:.75rem;font-weight:700;padding:2px 8px;border-radius:10px;color:#fff;margin-left:6px}
+.tag.p{background:var(--ok)}.tag.f{background:var(--red)}
+.ro{padding:7px 10px;margin:5px 0;border-radius:4px;border:1px solid #dde2dd;font-size:.95rem}
+.ro.c{background:#d9f0e0;border-color:var(--ok);font-weight:600}
+.ro.w{background:#fbdcda;border-color:var(--red)}
+.ex{font-size:.88rem;color:#444;margin-top:8px;background:#f6f6ee;padding:8px;border-radius:4px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;z-index:20;padding:12px}
+.modal .card{max-width:420px;text-align:center}
+.modal .row{display:flex;gap:10px;justify-content:center;margin-top:16px}
+footer{text-align:center;font-size:.78rem;color:#666;margin:20px 0}
+@media print{header,.top,.noprint,footer{display:none}.rv{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header>
+  <h1>UNIVERSITY OF NIGERIA, NSUKKA</h1>
+  <p>FSS 202 - Inferential Statistics | Computer Based Test (Practice)</p>
+</header>
+
+<div class="wrap">
+
+<!-- LOGIN -->
+<div id="login" class="card">
+  <h2 style="margin-top:0;color:var(--g)">Candidate Login</h2>
+  <label for="nm">Full Name (Surname first)</label>
+  <input type="text" id="nm" placeholder="e.g. OKAFOR CHIDI JOHN" autocomplete="off">
+  <label for="rg">Registration Number</label>
+  <input type="text" id="rg" placeholder="e.g. 2021/243456" autocomplete="off">
+  <div class="err" id="lerr"></div>
+  <h3 style="color:var(--g);margin-bottom:4px">Instructions</h3>
+  <ul class="rules">
+    <li>Total questions: <b>70</b> (randomly drawn from the question bank).</li>
+    <li>Time allowed: <b>25 minutes</b>. The test auto-submits when time is up.</li>
+    <li>Each question carries equal marks. No negative marking.</li>
+    <li>You may move back and forth and change answers before submission.</li>
+    <li>Refreshing the page will not reset your time or answers.</li>
+    <li>Corrections and all answers are shown after submission.</li>
+  </ul>
+  <button class="btn" onclick="startExam()">LOGIN &amp; START EXAM</button>
+</div>
+
+<!-- EXAM -->
+<div id="exam" class="hide">
+  <div class="top">
+    <div><b id="cn"></b><br><small id="cr"></small></div>
+    <div>Answered: <b id="ac">0</b>/70</div>
+    <div class="timer" id="tm">25:00</div>
+    <button class="btnr" onclick="askSubmit()">SUBMIT</button>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="qn" id="qn"></div>
+      <div class="qt" id="qt"></div>
+      <div id="qo"></div>
+      <div class="nav">
+        <button class="btn2" onclick="go(-1)">&laquo; Previous</button>
+        <button class="btn2" onclick="clr()">Clear</button>
+        <button class="btn" onclick="go(1)">Next &raquo;</button>
+      </div>
+    </div>
+    <div class="card">
+      <b>Question Palette</b>
+      <div class="pal" id="pal" style="margin-top:10px"></div>
+      <div class="leg">Green = answered &bull; Grey = not answered</div>
+    </div>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div id="result" class="hide">
+  <div class="card res">
+    <h2 style="margin:0;color:var(--g)">EXAMINATION RESULT</h2>
+    <div class="info">
+      <div><b>Name:</b> <span id="rn"></span></div>
+      <div><b>Reg No:</b> <span id="rr"></span></div>
+      <div><b>Course:</b> FSS 202</div>
+      <div><b>Date:</b> <span id="rd"></span></div>
+    </div>
+    <div class="score" id="sc"></div>
+    <div id="pc" style="font-size:1.1rem;margin:4px 0"></div>
+    <div id="gr" style="font-weight:700"></div>
+    <div id="bk" style="margin-top:8px;font-size:.92rem"></div>
+    <div class="noprint" style="margin-top:16px">
+      <button class="btn2" onclick="window.print()">Print Result</button>
+      <button class="btn" onclick="retake()">Take Again</button>
+    </div>
+  </div>
+  <h3 style="color:var(--g)">Answer Review (all questions)</h3>
+  <div id="rev"></div>
+</div>
+
+</div>
+<footer>FSS 202 Inferential Statistics CBT Practice &bull; Not an official UNN examination</footer>
+
+<!-- SUBMIT MODAL -->
+<div id="modal" class="modal hide">
+  <div class="card">
+    <h3 style="margin-top:0">Submit Examination?</h3>
+    <p id="mt"></p>
+    <div class="row">
+      <button class="btn2" onclick="closeM()">Go Back</button>
+      <button class="btnr" onclick="finish(false)">Yes, Submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Format: [question, CORRECT, wrong1, wrong2, wrong3, explanation] - options are shuffled automatically */
+var BANK=[
+["Inferential statistics is the procedure for deciding whether a relationship seen in sample data also holds in the:","Population","Sample only","Data array","Table","Inferential statistics generalises sample findings to the population."],
+["In the inferential procedure, the step that comes immediately after estimation is:","Hypothesis testing","Raw data collection","Data arraying","Tabulation","After estimation, the next step is the test of hypothesis."],
+["The expression Y = f(X1, X2, X3, ...) represents a:","Deterministic model","Data array","Chi-square table","Null hypothesis","It is the general form of a deterministic model."],
+["The dependent variable is also called the:","Outcome variable","Explanatory variable","Predictor variable","Control variable","The dependent variable is the outcome variable, represented by Y."],
+["The independent variable is also called the:","Explanatory variable","Outcome variable","Response variable","Predicted variable","Independent variables (X) explain or predict the dependent variable."],
+["Which of these is a tool for analysing a deterministic model?","Regression analysis","Frequency polygon","Pie chart","Histogram","Regression, multiple regression and correlation analysis analyse deterministic models."],
+["In the model Poverty = f(Unemployment), the dependent variable is:","Poverty","Unemployment","Both","Neither","Poverty depends on unemployment."],
+["In Crime rate = f(Unemployment and poverty), the independent variables are:","Unemployment and poverty","Crime rate","Crime rate and poverty","Crime rate and unemployment","Crime rate is the dependent variable."],
+["In Drug abuse = f(Peer influence), the independent variable is:","Peer influence","Drug abuse","Both","None","Peer influence explains drug abuse."],
+["A statistical estimate is a statistic obtained from a sample that lets us project the corresponding population:","Parameter","Variable","Error","Frequency","Estimates project population parameters."],
+["The formula chosen to carry out an estimation is called the:","Estimator","Estimate","Parameter","Hypothesis","An estimator is the formula; an estimate is the value obtained."],
+["In x-bar = Sum(x)/n, the estimate is:","x-bar (the sample mean)","Sum(x)/n","n","Sum(x)","x-bar is the estimate; Sum(x)/n is the estimator."],
+["Which of these is NOT one of the four estimates expected in the inferential method?","Frequency polygon","Correlation coefficient","Regression coefficient","Percentage of variation","The four are correlation coefficient, regression coefficient, percentage of variation and significance level of the model."],
+["A relevance of estimates is that they:","Save cost and time","Remove the need for sampling","Eliminate all errors","Replace hypotheses","Estimates save cost and time and support quick decisions."],
+["A statistical hypothesis is best described as a:","Guess about a population parameter subject to verification","Proven fact about a sample","Table of frequencies","Type of sample","A hypothesis is a guess about a parameter that is then verified."],
+["The first stage of a hypothesis test is to:","State the null and alternative hypotheses","Compute the calculated value","Apply the decision rule","Compare with the table value","Stage 1 is stating H0 and H1."],
+["The last stage of a hypothesis test is to:","Compare with the critical value and apply the decision rule","State the hypotheses","Choose the test statistic","Select the level of significance","Comparison and decision rule come last."],
+["The null hypothesis (H0) states that there is:","No significant relationship between the variables","A significant relationship","A perfect correlation","A positive correlation","H0 means no significant relationship."],
+["The alternative hypothesis fixes:","The direction of the test (one-tailed or two-tailed)","The sample size","The level of significance","The degrees of freedom","H1 decides one-tailed or two-tailed."],
+["For H0: r = 0, the alternative hypothesis for a two-tailed test is:","H1: r not equal to 0","H1: r = 0","H1: r = 1","H1: r = -1","A two-tailed alternative is r not equal to 0."],
+["The level of significance (alpha) is the maximum probability of risking a:","Type I error","Type II error","Sampling error","Rounding error","Alpha is the maximum Type I error risk."],
+["Levels of significance are commonly set at:","5% or 1%","50% or 25%","10% or 90%","0% or 100%","Commonly 0.05 or 0.01."],
+["A Type I error occurs when we:","Reject a true null hypothesis","Accept a false null hypothesis","Reject a false null hypothesis","Accept a true null hypothesis","Type I = rejecting a true H0."],
+["A Type II error occurs when we:","Fail to reject a false null hypothesis","Reject a true null hypothesis","Reject a false null hypothesis","Fail to reject a true null hypothesis","Type II = failing to reject a false H0."],
+["Degrees of freedom is the number of scores in a sample that are:","Free to vary","Equal to the mean","Above the median","Missing","That is the definition of df."],
+["The rejection region is the part of the sample space that leads to:","Rejection of the null hypothesis","Acceptance of the null hypothesis","Rejection of the sample","Increase in sample size","Values in this region reject H0."],
+["The acceptance region is the region that leads to:","Acceptance (non-rejection) of the null hypothesis","Rejection of the null hypothesis","Rejection of the alternative","A Type I error","It leads to not rejecting H0."],
+["In a one-tailed test the rejection region is:","In one tail of the curve","Split equally in both tails","At the centre of the curve","Absent","One-tailed means one side only."],
+["In a two-tailed test the rejection region is:","Split between both tails","In one tail only","At the mean","Outside the curve","Two-tailed means both tails."],
+["A test of statistical significance decides whether an observed relationship is:","Real or could have occurred by chance","Positive or negative","Linear or non-linear","Large or small sample","It separates real effects from chance."],
+["Which of the following is a parametric test?","Analysis of Variance (ANOVA)","Chi-square test","Spearman rank correlation","Sign test","t-test, Pearson and ANOVA are parametric."],
+["Which of the following is a non-parametric test?","Spearman rank order correlation","Student t-test","Pearson correlation","ANOVA","Chi-square and Spearman are non-parametric."],
+["Which is an assumption of parametric tests?","Normal distribution of the population","Skewed population","Distribution-free data","No assumptions","Parametric tests assume normality, random sampling and homogeneity of variance."],
+["Non-parametric tests are described as:","Distribution-free","Requiring normality","Requiring equal variances","Only for large samples","They need fewer assumptions about the population shape."],
+["Correlation is mainly used to measure the:","Strength of relationship between variables","Cause of a variable","Size of a sample","Mean of a population","Correlation measures strength of relationship."],
+["A moderate positive correlation ranges from:","0.4 to 0.6","0.0 to 0.1","0.8 to 1.0","-0.4 to -0.6","0.4 to 0.6 is moderate positive."],
+["A moderate negative correlation ranges from:","-0.4 to -0.6","0.4 to 0.6","-0.9 to -1.0","0.0 to -0.1","-0.4 to -0.6 is moderate negative."],
+["A correlation value close to +1 or -1 indicates a:","High (strong) correlation","Weak correlation","Zero correlation","Moderate correlation","Close to +/-1 is strong."],
+["Correlation alone cannot prove that variables are related because:","Correlation does not imply causation","It always equals 1","It cannot be computed","It needs a population","A third variable or chance may be responsible."],
+["Hours of study and examination scores are an example of a:","Linear positive relationship","Linear negative relationship","Non-linear relationship","No relationship","Y rises as X rises."],
+["Price and quantity demanded are an example of a:","Linear negative relationship","Linear positive relationship","Non-linear relationship","Perfect positive relationship","Y falls as X rises."],
+["Age and physical strength are an example of a:","Non-linear relationship","Linear positive relationship","Linear negative relationship","Zero relationship","No straight-line pattern."],
+["Using N=6, SumX=39, SumY=36, SumXY=179, SumX2=329, SumY2=258, the Pearson r is approximately:","-0.9767","0.9767","-0.3300","0.0576","r = -330 / sqrt(453 x 252) = -0.9767."],
+["For the Pearson r above, the relationship is:","Very strong negative","Very strong positive","Weak positive","No relationship","The more courses offered, the lower the average score."],
+["The degrees of freedom for testing the significance of r with N = 6 is:","4","5","6","8","df = N - 2 = 4."],
+["The two-tailed t table value at 5% with df = 4 is:","2.776","2.306","2.035","3.10","t(tab) = 2.776."],
+["With t calculated = -9.10 and t table = 2.776, the decision is to:","Reject H0","Fail to reject H0","Accept H0","Increase alpha","9.10 is greater than 2.776."],
+["The Spearman rank order correlation coefficient formula is:","rs = 1 - 6(Sum d^2) / n(n^2 - 1)","rs = Sum(O-E)^2 / E","rs = a + bX","rs = MSA / MSS/A","That is the Spearman formula."],
+["In the Spearman formula, d represents:","Difference between the ranks of each pair","Degrees of freedom","Deviation from the mean","Number of pairs","d is the rank difference."],
+["With n = 10 and Sum d^2 = 155.5, rs is approximately:","0.06","0.94","-0.06","0.58","rs = 1 - 933/990 = 0.0576."],
+["An rs of 0.06 indicates a:","Very weak positive relationship","Strong positive relationship","Strong negative relationship","Perfect relationship","Practically no relationship."],
+["The first stage of regression analysis is to:","Specify the model and identify dependent and independent variables","Interpret the results","Test the model","Predict values","Model specification comes first."],
+["In Y = alpha + beta X + u, alpha is the:","Intercept (value of Y when X = 0)","Slope","Error term","Coefficient of determination","Alpha is the intercept."],
+["In Y = alpha + beta X + u, beta measures the:","Change in Y from a one-unit change in X","Value of Y when X = 0","Error term","Sample size","Beta is the slope."],
+["In the simple linear model, u is the:","Error or disturbance term","Intercept","Slope","Independent variable","It captures omitted factors."],
+["If beta is less than 0, the relationship between X and Y is:","Negative (inverse)","Positive (direct)","No linear relationship","Perfect","Beta < 0 means inverse."],
+["If beta = 0, there is:","No linear relationship","A positive relationship","A negative relationship","A perfect relationship","Beta = 0 means no linear relationship."],
+["The line of best fit is obtained by the least-squares method, which:","Minimises the sum of squared errors","Maximises the sum of errors","Equals the mean","Minimises the mean","Least squares minimises squared errors."],
+["The coefficient of determination (R squared) is the proportion of variation in Y that is:","Explained by X","Unexplained by X","Due to error","Equal to the mean","R squared = explained variation."],
+["Unexplained variation in Y is attributed to the:","Error term u","Slope","Intercept","Independent variable","Left to the error term."],
+["In the attendance example (alpha = 1.711, beta = 0.0704), alpha means that with no class attendance the estimated performance is:","1.711","0.0704","4.9","45.3","Alpha is Y when X = 0."],
+["In that example, each additional class attended raises performance by about:","0.07 marks","1.71 marks","4.9 marks","45.3 marks","Beta = 0.0704."],
+["With t(beta) = 2.035 and table value 2.306 (df = 8, 5%), we conclude that attendance:","Has no significant effect on performance","Has a significant effect on performance","Perfectly determines performance","Has a negative effect","2.035 < 2.306, fail to reject H0."],
+["The degrees of freedom for testing beta with n = 10 is:","8","9","10","2","df = n - 2 = 8."],
+["Given n=8, SumX=31, SumY=60, SumXY=284, SumX2=151, the slope beta is about:","1.668","1.036","2.704","0.704","beta = 412/247 = 1.668."],
+["For the same data, the intercept alpha is about:","1.0364","1.668","7.5","3.875","alpha = 256/247 = 1.0364."],
+["With Y-hat = 1.036 + 1.668X, the predicted Y when X = 1 is:","2.704","1.668","2.0","3.372","1.036 + 1.668 = 2.704."],
+["If the actual Y = 2 and the predicted Y = 2.704, the error e is:","-0.704","0.704","2.704","-2.704","e = Y - Y-hat."],
+["The chi-square statistic is calculated as:","Sum of (O - E)^2 / E","Sum of (O + E) / E","Sum of O x E","Sum of (E - O)","That is the chi-square formula."],
+["The expected frequency in a chi-square contingency table is:","(Row total x Column total) / Grand total","Row total + Column total","Grand total / Row total","Observed / Column total","Eij = RiCj/N."],
+["The degrees of freedom for a chi-square contingency table is:","(r - 1)(c - 1)","r x c","N - 1","r + c","df = (r-1)(c-1)."],
+["Which is a condition for using chi-square?","No expected frequency should be less than 5","Sample size below 10","Observations must be dependent","Cells must be squared frequencies","Expected counts must be at least 5."],
+["For chi-square, the sample size should be above:","50","10","20","5","Sample size above 50."],
+["A two-way chi-square (contingency) test is used to test whether:","Two attributes depend on each other","A sample fits a theoretical distribution","Three means are equal","A slope is zero","That is the test of independence."],
+["A one-way chi-square test is a test of:","Goodness of fit","Independence","Regression","Correlation","One-way classification tests fit to a specified distribution."],
+["In the soup table, E for Igbo and Egusi = 155 x 185 / 531 is:","54.00","48.50","60.20","28.65","28,675 / 531 = 54.00."],
+["For the 4 x 3 soup-by-ethnic-group table, df is:","6","12","7","3","(4-1)(3-1) = 6."],
+["With chi-square calculated = 182.54 and table value 12.592, we conclude that type of soup eaten:","Depends on ethnic group","Is independent of ethnic group","Is unrelated to ethnic group","Cannot be tested","182.54 > 12.592, reject H0."],
+["The t-test is used when the population variance is unknown and:","n is less than 30","n is above 100","The data is nominal","The population is skewed","t-test is for small samples with unknown variance."],
+["The t-distribution curve is symmetric about:","t = 0","t = 1","The sample size","The mean of Y","It is symmetric around zero."],
+["An assumption of the independent t-test is that:","Participants are different in each group","The same participants are in both groups","Variances are unequal","Data is nominal","Independent groups of different participants."],
+["ANOVA is used to test the significance of differences between:","Three or more sample means","Two proportions only","Two ranks","Categorical frequencies","ANOVA compares three or more means."],
+["ANOVA is preferred to many t-tests because it avoids:","Increased chance of Type I error","Use of means","Use of samples","Use of F-tables","Multiple t-tests inflate Type I error."],
+["In ANOVA with a = 4 groups, df between groups (dfA) is:","3","4","20","23","dfA = a - 1."],
+["With a = 4 and s = 6, df within groups (dfS/A) is:","20","18","24","23","dfS/A = a(s-1) = 20."],
+["With a = 4 and s = 6, total degrees of freedom is:","23","24","20","3","dfT = a.s - 1 = 23."],
+["If SSA = 38 and dfA = 3, then MSA is:","12.6667","22.10","114","0.5732","38/3 = 12.6667."],
+["The F ratio in one-way ANOVA is:","MSA / MSS/A","MSS/A / MSA","SSA / SST","dfA / dfT","F = MSA over MSS/A."],
+["If SST = 480 and SSA = 38, the within-groups sum of squares SSS/A is:","442","518","38","20","480 - 38 = 442."],
+["With F calculated = 0.5732 and F tabulated (3, 20) = 3.10 at 5%, we conclude that:","Performance is independent of number of textbooks read","Performance depends on number of textbooks read","H0 is rejected","The test is invalid","0.5732 < 3.10, do not reject H0."],
+["The F tabulated value for (3, 20) at the 1% level is:","4.94","3.10","2.776","12.592","F(3,20) at 0.01 = 4.94."],
+["The ANOVA decision rule is to reject H0 if:","F calculated is greater than F tabulated","F calculated is less than F tabulated","F calculated equals 1","The sample is large","Reject when F cal > F tab."],
+["Quantitative data is expressed in:","Numbers or figures","Words only","Colours","Categories only","It can be measured and counted."],
+["Which is an example of qualitative data?","Gender","Age","Income","Test score","Gender, religion and colour are qualitative."],
+["Which is an example of quantitative data?","Income","Religion","Colour","Gender","Age, income and scores are quantitative."],
+["Quantitative data answers the question:","How much or how many","What kind","Which category","Why","Qualitative answers 'what kind'."]
+];
+
+var TOTAL=70, MINS=25;
+var S=null; // state
+var tick=null;
+
+function $(id){return document.getElementById(id)}
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function save(){try{localStorage.setItem("fss202cbt",JSON.stringify(S))}catch(e){}}
+
+function startExam(){
+  var n=$("nm").value.trim().toUpperCase(), r=$("rg").value.trim();
+  if(n.split(/\s+/).length<2){$("lerr").textContent="Enter your full name (at least two names).";return}
+  if(!/^[0-9A-Za-z\/\-]{6,20}$/.test(r)){$("lerr").textContent="Enter a valid registration number (e.g. 2021/243456).";return}
+  var picked=shuffle(BANK.slice()).slice(0,TOTAL).map(function(q){
+    var opts=shuffle([0,1,2,3].map(function(i){return {t:q[1+i],c:i===0}}));
+    return {q:q[0],o:opts,e:q[5],a:-1};
+  });
+  S={name:n,reg:r,qs:picked,cur:0,end:Date.now()+MINS*60000,done:false};
+  save(); begin();
+}
+
+function begin(){
+  $("login").classList.add("hide");$("result").classList.add("hide");$("exam").classList.remove("hide");
+  $("cn").textContent=S.name;$("cr").textContent="Reg No: "+S.reg;
+  buildPal();render();
+  clearInterval(tick);tick=setInterval(timer,500);timer();
+  window.scrollTo(0,0);
+}
+
+function timer(){
+  var left=Math.max(0,Math.round((S.end-Date.now())/1000));
+  var m=Math.floor(left/60),s=left%60;
+  var t=$("tm");t.textContent=(m<10?"0":"")+m+":"+(s<10?"0":"")+s;
+  t.className="timer"+(left<=180?" low":"");
+  if(left<=0){finish(true)}
+}
+
+function buildPal(){
+  var p=$("pal");p.innerHTML="";
+  S.qs.forEach(function(q,i){
+    var b=document.createElement("button");b.id="p"+i;b.textContent=i+1;
+    b.onclick=function(){S.cur=i;save();render()};p.appendChild(b);
+  });
+}
+
+function render(){
+  var q=S.qs[S.cur];
+  $("qn").textContent="Question "+(S.cur+1)+" of "+TOTAL;
+  $("qt").textContent=q.q;
+  var h="";
+  q.o.forEach(function(o,i){
+    h+='<div class="opt'+(q.a===i?" sel":"")+'" onclick="pick('+i+')"><b>'+"ABCD"[i]+'.</b><span>'+esc(o.t)+'</span></div>';
+  });
+  $("qo").innerHTML=h;
+  var c=0;
+  S.qs.forEach(function(x,i){
+    var b=$("p"+i);if(x.a>=0)c++;
+    b.className=(x.a>=0?"ans":"")+(i===S.cur?" cur":"");
+  });
+  $("ac").textContent=c;
+}
+function pick(i){S.qs[S.cur].a=i;save();render()}
+function clr(){S.qs[S.cur].a=-1;save();render()}
+function go(d){var n=S.cur+d;if(n<0||n>=TOTAL)return;S.cur=n;save();render();window.scrollTo(0,0)}
+
+function askSubmit(){
+  var un=S.qs.filter(function(q){return q.a<0}).length;
+  $("mt").textContent=un?("You have "+un+" unanswered question(s). Submit anyway?"):"You have answered all questions. Submit now?";
+  $("modal").classList.remove("hide");
+}
+function closeM(){$("modal").classList.add("hide")}
+
+function grade(p){
+  if(p>=70)return "Grade A (Excellent)";
+  if(p>=60)return "Grade B (Very Good)";
+  if(p>=50)return "Grade C (Good)";
+  if(p>=45)return "Grade D (Fair)";
+  if(p>=40)return "Grade E (Pass)";
+  return "Grade F (Fail)";
+}
+
+function finish(auto){
+  clearInterval(tick);closeM();
+  S.done=true;save();
+  var right=0,wrong=0,skip=0;
+  S.qs.forEach(function(q){
+    if(q.a<0)skip++;else if(q.o[q.a].c)right++;else wrong++;
+  });
+  var pct=(right/TOTAL*100);
+  $("exam").classList.add("hide");$("result").classList.remove("hide");
+  $("rn").textContent=S.name;$("rr").textContent=S.reg;$("rd").textContent=new Date().toLocaleString();
+  $("sc").textContent=right+" / "+TOTAL;
+  $("pc").textContent=pct.toFixed(1)+"%";
+  $("gr").textContent=grade(pct)+(pct>=40?"":"");
+  $("gr").style.color=pct>=40?"#1b7a3a":"#b3261e";
+  $("bk").textContent="Correct: "+right+"  |  Wrong: "+wrong+"  |  Not answered: "+skip+(auto?"  |  (Auto-submitted: time up)":"");
+  var h="";
+  S.qs.forEach(function(q,i){
+    var ok=q.a>=0&&q.o[q.a].c;
+    h+='<div class="rv '+(ok?"p":"f")+'"><b>Q'+(i+1)+'.</b> '+esc(q.q)+'<span class="tag '+(ok?"p":"f")+'">'+(ok?"PASSED":(q.a<0?"NOT ANSWERED":"FAILED"))+'</span>';
+    q.o.forEach(function(o,j){
+      var cls="ro";
+      if(o.c)cls+=" c";else if(j===q.a)cls+=" w";
+      var note=o.c?" &nbsp;&#10004; Correct answer":(j===q.a?" &nbsp;&#10008; Your answer":"");
+      if(o.c&&j===q.a)note=" &nbsp;&#10004; Your answer (Correct)";
+      h+='<div class="'+cls+'"><b>'+"ABCD"[j]+'.</b> '+esc(o.t)+note+'</div>';
+    });
+    h+='<div class="ex"><b>Explanation:</b> '+esc(q.e)+'</div></div>';
+  });
+  $("rev").innerHTML=h;
+  window.scrollTo(0,0);
+}
+
+function retake(){
+  try{localStorage.removeItem("fss202cbt")}catch(e){}
+  S=null;$("result").classList.add("hide");$("login").classList.remove("hide");window.scrollTo(0,0);
+}
+
+window.onbeforeunload=function(){if(S&&!S.done&&!$("exam").classList.contains("hide"))return "Exam in progress"};
+
+(function resume(){
+  try{
+    var d=JSON.parse(localStorage.getItem("fss202cbt")||"null");
+    if(d&&d.qs&&d.qs.length===TOTAL){
+      S=d;
+      if(S.done||Date.now()>=S.end){finish(!S.done)}else{begin()}
+    }
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
